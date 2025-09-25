@@ -9,3 +9,7 @@ from services.cache_service import CacheService
 from models.responses import FilmListResponse, CharacterListResponse, StarshipListResponse
 import logging
 from contextlib import asynccontextmanager
+
+# Logging needs to be configurated
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
