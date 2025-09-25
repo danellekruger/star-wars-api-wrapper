@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -10,14 +10,14 @@ from models.responses import FilmListResponse, CharacterListResponse, StarshipLi
 import logging
 from contextlib import asynccontextmanager
 
-# Logging needs to be configurated
+# Logging needs to be configured
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Setup for the rate limiter
+# Rate limiter setup
 limiter = Limiter(key_func=get_remote_address)
 
-# Initialize services from the services folder
+# Initialize services
 cache_service = CacheService()
 swapi_service = SWAPIService(cache_service)
 
@@ -32,7 +32,7 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app with enhanced metadata
 app = FastAPI(
-    title="Star Wars API Wrapper",
+    title="Star Wars API Wrapper 🌟",
     description="""
     An outstanding API wrapper for the Star Wars API (SWAPI) with advanced caching, 
     rate limiting, and comprehensive error handling.
@@ -45,16 +45,16 @@ app = FastAPI(
     """,
     version="1.0.0",
     contact={
-        "name": "Danelle Kruger",
-        "email": "kruger.danelle2829@gmail.com",
+        "name": "Your Name",
+        "email": "your.email@example.com",
     },
     license_info={
-        "name": "dkSWAPI",
+        "name": "MIT",
     },
     lifespan=lifespan
 )
 
-# Add CORS middleware, security mechanism for FastAPI
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
